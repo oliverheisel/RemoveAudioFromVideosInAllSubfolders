@@ -3,7 +3,8 @@ import shutil
 from moviepy.editor import VideoFileClip
 
 # Define the base directory containing the videos
-base_dir = "/Users/oliverheisel/Library/CloudStorage/GoogleDrive-documentmanagement@segelclubenge.ch/My Drive/01_Oli_Coaching"
+## Change it to your base directory!
+base_dir = "Your Path here!" 
 
 
 def process_videos(directory):
@@ -13,7 +14,7 @@ def process_videos(directory):
 
     for subdir, dirs, files in os.walk(directory):
         for file in files:
-            if file.startswith('OA_') or file.startswith('WA_'):
+            if file.startswith('WOA_') or file.startswith('WA_'):
                 continue  # Skip files already processed or marked to be ignored
 
             found_files = True  # Set the flag as true when eligible files are found
@@ -24,7 +25,7 @@ def process_videos(directory):
                 clip = VideoFileClip(full_path)
                 clip = clip.without_audio()
                 # Define new filename and save
-                new_filename = f"OA_{filename}.mp4"
+                new_filename = f"WOA_{filename}.mp4"
                 new_full_path = os.path.join(subdir, new_filename)
                 clip.write_videofile(new_full_path, codec='libx264')
                 clip.close()
@@ -42,9 +43,5 @@ def process_videos(directory):
         print(f"Total videos processed: {video_count}")
 
 
-def main():
-    process_videos(base_dir)
-
-
 if __name__ == "__main__":
-    main()
+    process_videos(base_dir)
